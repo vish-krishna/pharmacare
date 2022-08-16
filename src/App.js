@@ -87,11 +87,11 @@ function App() {
                                 element={<AddDrug />}
                             />
 
-                            {/* <Route
-                                path="/admin/update-drug"
+                            <Route
+                                path="/admin/update-drug/:id"
                                 exact
                                 element={<UpdateDrug />}
-                            /> */}
+                            />
                             <Route
                                 path="/admin/view-orders"
                                 exact

@@ -1,17 +1,59 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Input, Form, FormGroup, Container, Card, Button } from "reactstrap";
+import baseUrl from "../../api's/base_url";
 
-const UpdateDrug = ({ drug }) => {
-    const [Drug, setDrug] = useState(drug);
+const UpdateDrug = (props) => {
+    const [Drug, setDrug] = useState({});
     console.log("update drug .js");
-    console.log(drug);
-    console.log(Drug);
+    let id = useParams().id;
+    const getDrugByIdFromApi = () => {
+        axios.get(baseUrl + "/drug/" + id).then(
+            (response) => {
+                console.log(response.data);
+                setDrug(response.data);
+                console.log("set drug");
+                console.log(Drug);
+            },
+            (error) => {
+                console.log("error in drug by id");
+                console.log(error);
+            }
+        );
+    };
+
+    useEffect(() => {
+        document.title = "Update-Drug";
+        getDrugByIdFromApi();
+    }, []);
+
+    const updateDrugOnApi = () => {
+        axios.put(baseUrl + "/drug/" + id, Drug).then(
+            (response) => {
+                console.log(response.data);
+                setDrug(response.data);
+                console.log("set drug");
+                console.log(Drug);
+            },
+            (error) => {
+                console.log("error in drug by id");
+                console.log(error);
+            }
+        );
+    };
+
+    const updateHandler = () => {
+        updateDrugOnApi();
+    };
+
     return (
         <div>
             <h1>Update Drug</h1>
+            {/* <h1>{Drug.drugName}</h1> */}
             <Container>
                 <Card className="p-4" color="secondary">
-                    <Form method="post">
+                    <Form onSubmit={updateHandler}>
                         <FormGroup>
                             <label>Drug Name</label>
                             <Input
@@ -19,6 +61,7 @@ const UpdateDrug = ({ drug }) => {
                                 placeholder="Enter Drug Name"
                                 id="DName"
                                 name="drugName"
+                                defaultValue={Drug.drugName}
                                 onChange={(e) => {
                                     setDrug({
                                         ...Drug,
@@ -32,6 +75,7 @@ const UpdateDrug = ({ drug }) => {
                                 placeholder="Enter Expiry Date"
                                 id="ExpDate"
                                 name="expiryDate"
+                                defaultValue={Drug.expiryDate}
                                 onChange={(e) => {
                                     setDrug({
                                         ...Drug,
@@ -45,6 +89,7 @@ const UpdateDrug = ({ drug }) => {
                                 placeholder="Enter Quantity"
                                 id="Qty"
                                 name="drugQuantity"
+                                defaultValue={Drug.drugQuantity}
                                 onChange={(e) => {
                                     setDrug({
                                         ...Drug,
@@ -58,6 +103,7 @@ const UpdateDrug = ({ drug }) => {
                                 placeholder="Enter Drug Price"
                                 id="price"
                                 name="price"
+                                defaultValue={Drug.price}
                                 onChange={(e) => {
                                     setDrug({
                                         ...Drug,
@@ -65,9 +111,14 @@ const UpdateDrug = ({ drug }) => {
                                     });
                                 }}
                             ></Input>
-                            <Button color="dark" type="submit">
-                                Update
+                            <Button color="dark" type="submit" className="mx-2">
+                                Save Update
                             </Button>
+                            <Link to="/admin/view-drugs">
+                                <Button color="dark" type="submit">
+                                    Cancel
+                                </Button>
+                            </Link>
                         </FormGroup>
                     </Form>
                 </Card>

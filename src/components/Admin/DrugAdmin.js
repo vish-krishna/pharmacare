@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 import {
     Card,
     CardBody,
@@ -9,6 +10,7 @@ import {
     Button,
 } from "reactstrap";
 import baseUrl from "../../api's/base_url";
+import UpdateDrug from "./UpdateDrug";
 
 const DrugAdmin = ({ drug, flag, deletionView }) => {
     const deleteDrugHandler = () => {
@@ -40,7 +42,9 @@ const DrugAdmin = ({ drug, flag, deletionView }) => {
                     </CardBody>
                     {!flag ? (
                         <CardBody>
-                            <Button className="mx-1">update</Button>
+                            <Link to={"/admin/update-drug/" + drug.drugId}>
+                                <Button className="mx-1">update</Button>
+                            </Link>
 
                             <Button onClick={deleteDrugHandler}>delete</Button>
                         </CardBody>
