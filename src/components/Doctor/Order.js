@@ -1,6 +1,6 @@
 import React from "react";
-import Drug from "./Drug";
 import { Card, CardBody, CardText, Container, Button } from "reactstrap";
+import DrugInOrder from "./DrugInOrder";
 
 // doctorId: "9be2f2d1-8658-4be3-b479-d7b982e0bfcc"
 // drugList: Array(2)
@@ -32,13 +32,10 @@ function Order({ order }) {
                         </CardText>
                         {order.drugList.length > 0
                             ? order.drugList.map((d) => (
-                                  <Drug key={d.drugId} drug={d} />
+                                  <DrugInOrder key={d.drugId} drug={d} />
                               ))
                             : "empty drug"}
                         <CardText>Total Price : {order.totalPrice}</CardText>
-                    </CardBody>
-                    <CardBody>
-                        <Button>Add to billing</Button>
                     </CardBody>
                 </Card>
             </Container>

@@ -7,21 +7,21 @@ function DoctorMenu() {
         <ListGroup>
             <Link
                 className="list-group-item list-group-item-action"
-                to="/doctor-menu/home"
+                to="/doctor/home"
             >
                 Home
             </Link>
 
             <Link
                 className="list-group-item list-group-item-action"
-                to="/doctor-menu/view-drugs"
+                to="/doctor/view-drugs"
             >
                 View Drugs
             </Link>
 
             <Link
                 className="list-group-item list-group-item-action"
-                to="/doctor-menu/view-orders"
+                to="/doctor/view-orders"
             >
                 View Orders
             </Link>
