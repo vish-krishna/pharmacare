@@ -5,7 +5,7 @@ import { Button, Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
 
 function Navb() {
     return (
-        <div>
+        <>
             <Navbar color="secondary" light expand container="lg">
                 <NavbarBrand>PHARMACARE</NavbarBrand>
                 <Nav>
@@ -31,7 +31,7 @@ function Navb() {
                     </NavItem>
                 </Nav>
             </Navbar>
-        </div>
+        </>
     );
 }
 

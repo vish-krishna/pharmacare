@@ -15,7 +15,7 @@ import baseUrl from "../../api's/base_url";
 function ViewDrugsAdmin() {
     const [drugs, setDrugs] = useState({});
 
-    const getOrdersFromApi = () => {
+    const getDrugsFromApi = () => {
         axios.get(baseUrl + "/drug").then(
             (response) => {
                 setDrugs(response.data);
@@ -30,8 +30,12 @@ function ViewDrugsAdmin() {
 
     useEffect(() => {
         document.title = "Drugs";
-        getOrdersFromApi();
+        getDrugsFromApi();
     }, []);
+
+    const updateDrugView = (id) => {
+        setDrugs(drugs.filter((d) => d.drugId !== id));
+    };
 
     return (
         <div>
@@ -50,7 +54,13 @@ function ViewDrugsAdmin() {
             {/* <Drug drug={drugs.at(1)} /> */}
 
             {drugs.length > 0
-                ? drugs.map((d) => <DrugAdmin key={d.drugId} drug={d} />)
+                ? drugs.map((d) => (
+                      <DrugAdmin
+                          key={d.drugId}
+                          drug={d}
+                          deletionView={updateDrugView}
+                      />
+                  ))
                 : "no drugs available"}
         </div>
     );

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import {
     Card,
@@ -7,11 +8,23 @@ import {
     CardSubtitle,
     Button,
 } from "reactstrap";
+import baseUrl from "../../api's/base_url";
 
-const DrugAdmin = ({ drug, flag }) => {
+const DrugAdmin = ({ drug, flag, deletionView }) => {
+    const deleteDrugHandler = () => {
+        axios.delete(baseUrl + "/drug/" + drug.drugId).then(
+            (response) => {
+                console.log(response);
+                deletionView(drug.drugId);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    };
+
     return (
         <div>
-            {/* {console.log(drug)} drugId: '8f5dbbea-ad4a-4768-82c5-5b4fa9954806', drugName: 'd_name_3', drugQuantity: 380, expiryDate: '2025-06-02T00:00:00.000+00:00', price: 150, …*/}
             <Container>
                 <Card>
                     <CardBody>
@@ -28,7 +41,8 @@ const DrugAdmin = ({ drug, flag }) => {
                     {!flag ? (
                         <CardBody>
                             <Button className="mx-1">update</Button>
-                            <Button>delete</Button>
+
+                            <Button onClick={deleteDrugHandler}>delete</Button>
                         </CardBody>
                     ) : (
                         ""

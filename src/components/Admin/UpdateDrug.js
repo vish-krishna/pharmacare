@@ -1,35 +1,17 @@
 import React, { useState } from "react";
 import { Input, Form, FormGroup, Container, Card, Button } from "reactstrap";
-import axios from "axios";
-import baseUrl from "../../api's/base_url";
-function AddDrug() {
-    const [Drug, setDrug] = useState({});
-    const handleAddDrugForm = (event) => {
-        console.log("handle form drug");
-        console.log(Drug);
-        AddDrugToApi(Drug);
-        event.preventDefault();
-    };
 
-    const AddDrugToApi = (drugDetails) => {
-        console.log("handle form drugDetails");
-        console.log(drugDetails);
-        axios.post(baseUrl + "/drug", drugDetails).then(
-            (response) => {
-                console.log("drug save successfully");
-            },
-            (error) => {
-                console.log("drug does not save");
-            }
-        );
-    };
-
+const UpdateDrug = ({ drug }) => {
+    const [Drug, setDrug] = useState(drug);
+    console.log("update drug .js");
+    console.log(drug);
+    console.log(Drug);
     return (
-        <div className="AddDrug my-2">
-            <h1>ADD DRUG</h1>
+        <div>
+            <h1>Update Drug</h1>
             <Container>
                 <Card className="p-4" color="secondary">
-                    <Form onSubmit={handleAddDrugForm}>
+                    <Form method="post">
                         <FormGroup>
                             <label>Drug Name</label>
                             <Input
@@ -84,7 +66,7 @@ function AddDrug() {
                                 }}
                             ></Input>
                             <Button color="dark" type="submit">
-                                Add
+                                Update
                             </Button>
                         </FormGroup>
                     </Form>
@@ -92,6 +74,6 @@ function AddDrug() {
             </Container>
         </div>
     );
-}
+};
 
-export default AddDrug;
+export default UpdateDrug;
