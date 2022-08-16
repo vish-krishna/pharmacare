@@ -1,94 +1,148 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
     Button,
     Container,
+    Card,
+    Input,
     Form,
     FormGroup,
-    Input,
-    Col,
     Row,
-    Card,
+    Col,
 } from "reactstrap";
+import axios from "axios";
 
 const Login = () => {
     return (
-        <div className="login my-2">
+        <div className=" login my-4">
             <Container>
-                <Card className="p-4" color="secondary">
-                    <Form>
-                        <FormGroup>
-                            <label>Email</label>
-                            <Input
-                                type="email"
-                                placeholder="Enter Email Id"
-                                id="Email"
-                                name="Email"
-                            ></Input>
-                            <label>Password</label>
-                            <Input
-                                type="password"
-                                placeholder="Enter Password"
-                                id="Pass"
-                                name="pass"
-                            ></Input>
-                            <Button color="dark">login</Button>
-                        </FormGroup>
-                    </Form>
-                </Card>
-            </Container>
-            <hr />
-            <Container>
-                <Card className="p-4" color="secondary">
-                    <Form>
-                        <FormGroup>
-                            <label>Name</label>
-                            <Input
-                                type="text"
-                                placeholder="Enter Full Name"
-                                id="Name"
-                                name="Name"
-                            ></Input>
-                            <Row>
-                                <Col md={6}>
-                                    <label>Email</label>
+                <Row>
+                    <Col md={4}></Col>
+                    <Col md={4}>
+                        <Card className="p-4" color="secondary">
+                            <Form className="">
+                                <FormGroup>
+                                    <label className="m-2">Email</label>
                                     <Input
                                         type="email"
                                         placeholder="Enter Email Id"
                                         id="Email"
                                         name="Email"
+                                        className="m-2"
                                     ></Input>
-                                </Col>
-                                <Col md={6}>
-                                    <label>Password</label>
+                                    <label className="m-2">Password</label>
                                     <Input
                                         type="password"
                                         placeholder="Enter Password"
                                         id="Pass"
                                         name="pass"
+                                        className="m-2"
                                     ></Input>
-                                </Col>
-                            </Row>
-                            <label>Contact</label>
-                            <Input
-                                type="text"
-                                placeholder="Enter Contact Number"
-                                id="Contact"
-                                name="Contact"
-                            ></Input>
-
-                            <label>Role</label>
-                            <Input type="select" id="role" name="role">
-                                <option>Doctor</option>
-                                <option>Admin</option>
-                            </Input>
-
-                            <Button color="dark">Register</Button>
-                        </FormGroup>
-                    </Form>
-                </Card>
+                                    <Button color="dark" className="m-2">
+                                        login
+                                    </Button>
+                                    <Link to="/register">
+                                        <Button color="dark" className="m-2">
+                                            Register
+                                        </Button>
+                                    </Link>
+                                </FormGroup>
+                            </Form>
+                        </Card>
+                    </Col>
+                </Row>
             </Container>
         </div>
     );
 };
 
 export default Login;
+
+// import { useState } from "react";
+// import "./LoginForm.css";
+
+// function Login() {
+//     // React States
+//     const [errorMessages, setErrorMessages] = useState({});
+//     const [isSubmitted, setIsSubmitted] = useState(false);
+
+//     // User Login info
+//     const database = [
+//         {
+//             username: "user1",
+//             password: "pass1",
+//         },
+//         {
+//             username: "user2",
+//             password: "pass2",
+//         },
+//     ];
+
+//     const errors = {
+//         uname: "invalid username",
+//         pass: "invalid password",
+//     };
+
+//     const handleSubmit = (event) => {
+//         //Prevent page reload
+//         event.preventDefault();
+
+//         let { uname, pass } = document.forms[0];
+
+//         // Find user login info
+//         const userData = database.find((user) => user.username === uname.value);
+
+//         // Compare user info
+//         if (userData) {
+//             if (userData.password !== pass.value) {
+//                 // Invalid password
+//                 setErrorMessages({ name: "pass", message: errors.pass });
+//             } else {
+//                 setIsSubmitted(true);
+//             }
+//         } else {
+//             // Username not found
+//             setErrorMessages({ name: "uname", message: errors.uname });
+//         }
+//     };
+
+//     // Generate JSX code for error message
+//     const renderErrorMessage = (name) =>
+//         name === errorMessages.name && (
+//             <div className="error">{errorMessages.message}</div>
+//         );
+
+//     // JSX code for login form
+//     const renderForm = (
+//         <div className="form">
+//             <form onSubmit={handleSubmit}>
+//                 <div className="input-container">
+//                     <label>Username </label>
+//                     <input type="text" name="userEmail" required />
+//                     {renderErrorMessage("uname")}
+//                 </div>
+//                 <div className="input-container">
+//                     <label>Password </label>
+//                     <input type="password" name="userPassword" required />
+//                     {renderErrorMessage("pass")}
+//                 </div>
+//                 <div className="button-container">
+//                     <input type="submit" />
+//                 </div>
+//             </form>
+//         </div>
+//     );
+
+//     return (
+//         <div className="app">
+//             <div className="login-form">
+//                 <div className="title">Sign In</div>
+//                 {isSubmitted ? (
+//                     <div>User is successfully logged in</div>
+//                 ) : (
+//                     renderForm
+//                 )}
+//             </div>
+//         </div>
+//     );
+// }
