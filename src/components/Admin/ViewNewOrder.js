@@ -1,10 +1,13 @@
 import React from "react";
-import { Container } from "reactstrap";
+import { Container, NavbarBrand, Navbar } from "reactstrap";
 import OrderAdmin from "./OrderAdmin";
 function ViewNewOrder({ orders, updateViewOrder }) {
+    let newOrder = 0;
     return (
         <div>
-            <h1>Picked up Order</h1>
+            <Navbar className="my-2" color="secondary" dark>
+                <NavbarBrand>New Orders</NavbarBrand>
+            </Navbar>
             <Container>
                 {orders.length > 0
                     ? orders.map((o) => {
@@ -13,12 +16,14 @@ function ViewNewOrder({ orders, updateViewOrder }) {
                                   key={o.orderId}
                                   order={o}
                                   updateViewOrder={updateViewOrder}
+                                  d={newOrder++}
                               />
                           ) : (
                               ""
                           );
                       })
                     : "No order"}
+                {newOrder === 0 ? <p>There is no new order available</p> : ""}
             </Container>
         </div>
     );

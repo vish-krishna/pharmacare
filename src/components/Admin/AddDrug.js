@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Input, Form, FormGroup, Container, Card, Button } from "reactstrap";
+import {
+    Input,
+    Form,
+    FormGroup,
+    Container,
+    Card,
+    Button,
+    Navbar,
+    NavbarBrand,
+} from "reactstrap";
 import axios from "axios";
 import baseUrl from "../../api's/base_url";
 function AddDrug() {
@@ -26,7 +35,9 @@ function AddDrug() {
 
     return (
         <div className="AddDrug my-2">
-            <h1>ADD DRUG</h1>
+            <Navbar className="my-2" color="secondary" dark>
+                <NavbarBrand>Fill all the Details to add drug</NavbarBrand>
+            </Navbar>
             <Container>
                 <Card className="p-4" color="secondary">
                     <Form onSubmit={handleAddDrugForm}>

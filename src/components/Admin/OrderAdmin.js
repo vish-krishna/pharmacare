@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import DrugAdmin from "./DrugAdmin";
+
 import {
-    Card,
-    CardBody,
-    CardText,
-    Container,
     Button,
-    Row,
-    Col,
+    Badge,
+    Table,
+    Accordion,
+    AccordionBody,
+    AccordionHeader,
+    AccordionItem,
 } from "reactstrap";
 import axios from "axios";
 import baseUrl from "../../api's/base_url";
 
 function OrderAdmin({ order, updateViewOrder }) {
+    let index = 0;
+    // Accordian state toggle
+    const [open, setOpen] = useState();
+    const toggle = (id) => {
+        if (open === id) {
+            setOpen();
+        } else {
+            setOpen(id);
+        }
+    };
+
     const verifyOrder = () => {
         axios.get(baseUrl + "/order/verify/" + order.orderId).then(
             (response) => {
@@ -46,81 +58,112 @@ function OrderAdmin({ order, updateViewOrder }) {
         console.log("handle pick up ");
         pickUpOrder();
     };
-
     return (
         <div>
-            <Container>
-                <Card>
-                    <CardBody>
-                        <Row>
-                            <CardText>Order id : {order.orderId}</CardText>
+            <Accordion open={open} toggle={toggle}>
+                <AccordionItem>
+                    <AccordionHeader targetId="1">
+                        <strong>Order Id : </strong>
+                        {order.orderId}
+                        <span className="mx-2">
+                            <strong> Doctor Id :</strong> {order.doctorId}
+                        </span>
+                        {order.verified ? (
+                            <Badge className="mx-2" color="success" pill>
+                                verified
+                            </Badge>
+                        ) : (
+                            ""
+                        )}
+                        {order.pickedUp ? (
+                            <Badge className="mx-2" color="success" pill>
+                                Picked
+                            </Badge>
+                        ) : (
+                            ""
+                        )}
+                    </AccordionHeader>
+                    <AccordionBody accordionId="1">
+                        {order.drugList.length > 0 ? (
+                            <Table responsive>
+                                <thead>
+                                    <tr>
+                                        <th>S.N.</th>
+                                        <th>Drug Id</th>
+                                        <th>Drug Name</th>
+                                        <th>Expiry Date</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {order.drugList.map((d) => (
+                                        <DrugAdmin
+                                            key={d.drugId}
+                                            drug={d}
+                                            flag={true}
+                                            index={++index}
+                                        />
+                                    ))}
+                                    <tr>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td>
+                                            {!order.verified ? (
+                                                <Button
+                                                    size="sm"
+                                                    className="mx-1"
+                                                    color="primary"
+                                                    onClick={handleVerifyOrder}
+                                                >
+                                                    Verify
+                                                </Button>
+                                            ) : (
+                                                ""
+                                            )}
 
-                            <CardText>Doctor id : {order.doctorId}</CardText>
+                                            {order.verified ? (
+                                                order.pickedUp ? (
+                                                    ""
+                                                ) : (
+                                                    <Button
+                                                        size="sm"
+                                                        className="mx-1"
+                                                        color="primary"
+                                                        onClick={handlePickUp}
+                                                    >
+                                                        pick Up
+                                                    </Button>
+                                                )
+                                            ) : (
+                                                <Button
+                                                    size="sm"
+                                                    className="mx-1"
+                                                    color="primary"
+                                                    disabled
+                                                >
+                                                    pick Up
+                                                </Button>
+                                            )}
+                                        </td>
 
-                            <CardText>
-                                {order.verified ? (
-                                    <Button className="mx-2" color="info">
-                                        Verified
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        className="mx-2"
-                                        color="success"
-                                        onClick={handleVerifyOrder}
-                                    >
-                                        Verify
-                                    </Button>
-                                )}
-                                {order.verified ? (
-                                    order.pickedUp ? (
-                                        <Button className="mx-2" color="info">
-                                            pickedUp
-                                        </Button>
-                                    ) : (
-                                        <Button
-                                            className="mx-2"
-                                            color="success"
-                                            onClick={handlePickUp}
-                                        >
-                                            pick Up
-                                        </Button>
-                                    )
-                                ) : (
-                                    <Button
-                                        className="mx-2"
-                                        color="danger"
-                                        disabled
-                                    >
-                                        pick Up
-                                    </Button>
-                                )}
+                                        <td>
+                                            <strong>Total Price :</strong>
+                                        </td>
 
-                                {/* Verified :{" "}
-                                    {order.verified ? "true" : "false"} Picked
-                                    up : {order.pickedUp ? "true" : "false"} */}
-                            </CardText>
-
-                            {/* <Col md={2}>
-                                <CardText></CardText>
-                            </Col> */}
-
-                            {order.drugList.length > 0
-                                ? order.drugList.map((d) => (
-                                      <DrugAdmin
-                                          key={d.drugId}
-                                          drug={d}
-                                          flag={true}
-                                      />
-                                  ))
-                                : "empty drug"}
-
-                            <CardText>
-                                Total Price : {order.totalPrice}
-                            </CardText>
-                        </Row>
-                    </CardBody>
-                </Card>
-            </Container>
+                                        <td> {order.totalPrice}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        ) : (
+                            "empty drug"
+                        )}
+                    </AccordionBody>
+                </AccordionItem>
+            </Accordion>
         </div>
     );
 }

@@ -35,21 +35,6 @@ function ViewOrdersAdmin({ flag }) {
         getOrdersFromApi();
     };
     const view = () => {
-        // if (flag == "verified") {
-        //     return (
-        //         <ViewVerifiedOrder
-        //             orders={orders}
-        //             updateViewOrder={updateViewOrder}
-        //         />
-        //     );
-        // } else if (flag == "new") {
-
-        // } else if (flag == "pickedup") {
-
-        // } else {
-
-        // }
-
         switch (flag) {
             case "verified":
                 return (
@@ -82,27 +67,6 @@ function ViewOrdersAdmin({ flag }) {
                 );
         }
     };
-    return (
-        <div>
-            <h1>view orders</h1>
-            {view()}
-            {/* {pickedup ? (
-                <ViewPickedUpOrder
-                    orders={orders}
-                    updateViewOrder={updateViewOrder}
-                />
-            ) : verified ? (
-                <ViewVerifiedOrder
-                    orders={orders}
-                    updateViewOrder={updateViewOrder}
-                />
-            ) : (
-                <ViewAllOrders
-                    orders={orders}
-                    updateViewOrder={updateViewOrder}
-                />
-            )} */}
-        </div>
-    );
+    return <div>{view()}</div>;
 }
 export default ViewOrdersAdmin;

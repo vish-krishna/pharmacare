@@ -36,8 +36,9 @@ function App() {
                     <Routes>
                         <Route path="/register" exact element={<Register />} />
                     </Routes>
+                    <Col md={1}></Col>
 
-                    <Col md={3}>
+                    <Col md={2}>
                         <Routes>
                             <Route
                                 path="/doctor/*"

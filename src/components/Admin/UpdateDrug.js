@@ -53,7 +53,7 @@ const UpdateDrug = (props) => {
             {/* <h1>{Drug.drugName}</h1> */}
             <Container>
                 <Card className="p-4" color="secondary">
-                    <Form onSubmit={updateHandler}>
+                    <Form>
                         <FormGroup>
                             <label>Drug Id</label>
                             <Input defaultValue={Drug.drugId} readOnly></Input>
@@ -113,9 +113,16 @@ const UpdateDrug = (props) => {
                                     });
                                 }}
                             ></Input>
-                            <Button color="dark" type="submit" className="mx-2">
-                                Save Update
-                            </Button>
+                            <Link to="/admin/view-drugs">
+                                <Button
+                                    color="dark"
+                                    type="submit"
+                                    className="mx-2"
+                                    onClick={updateHandler}
+                                >
+                                    Save Update
+                                </Button>
+                            </Link>
                             <Link to="/admin/view-drugs">
                                 <Button color="dark" type="submit">
                                     Cancel

@@ -1,10 +1,13 @@
 import React from "react";
-import { Container } from "reactstrap";
+import { Container, Navbar, NavbarBrand } from "reactstrap";
 import OrderAdmin from "./OrderAdmin";
 function ViewPickedUpOrder({ orders, updateViewOrder }) {
     return (
         <div>
-            <h1>Picked up Order</h1>
+            <Navbar className="my-2" color="secondary" dark>
+                <NavbarBrand>Picked Up Orders</NavbarBrand>
+            </Navbar>
+
             <Container>
                 {/* {console.log("view all  orders")}
                 {console.log(orders.length)} */}

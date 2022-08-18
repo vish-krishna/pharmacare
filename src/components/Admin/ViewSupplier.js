@@ -27,7 +27,9 @@ function ViewSupplier() {
 
     return (
         <div>
-            <h1>Supplier List </h1>
+            <h1 className="my-2" color="secondary">
+                Supplier List
+            </h1>
             {supplier.length > 0
                 ? supplier.map((s) => (
                       <Supplier key={s.supplierId} supplier={s} />

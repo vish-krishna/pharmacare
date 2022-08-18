@@ -1,10 +1,13 @@
 import React from "react";
-import { Container } from "reactstrap";
+import { Container, NavbarBrand, Navbar } from "reactstrap";
 import OrderAdmin from "./OrderAdmin";
 function ViewVerifiedOrder({ orders, updateViewOrder }) {
+    let verifiedOrder = 0;
     return (
         <div>
-            <h1>Verified Orders</h1>
+            <Navbar className="my-2" color="secondary" dark>
+                <NavbarBrand>Verified Orders</NavbarBrand>
+            </Navbar>
             <Container>
                 {console.log("view all  orders")}
                 {console.log(orders.length)}
@@ -12,17 +15,23 @@ function ViewVerifiedOrder({ orders, updateViewOrder }) {
                     ? orders.map((o) => {
                           console.log("view order in map ");
                           //   console.log(o);
-                          return o.verified && o.pickedUp == false ? (
+                          return o.verified && !o.pickedUp ? (
                               <OrderAdmin
                                   key={o.orderId}
                                   order={o}
                                   updateViewOrder={updateViewOrder}
+                                  d={verifiedOrder++}
                               />
                           ) : (
                               ""
                           );
                       })
                     : "No order"}
+                {verifiedOrder === 0 ? (
+                    <p>There is no order which is only verified</p>
+                ) : (
+                    ""
+                )}
             </Container>
         </div>
     );
