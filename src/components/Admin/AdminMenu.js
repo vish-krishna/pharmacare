@@ -14,16 +14,34 @@ function AdminMenu() {
 
             <Link
                 className="list-group-item list-group-item-action"
-                to="/admin/view-orders"
+                to="/admin/view-drugs"
             >
-                View Orders
+                View Drugs
             </Link>
 
             <Link
                 className="list-group-item list-group-item-action"
-                to="/admin/view-drugs"
+                to="/admin/view-orders"
             >
-                View Drugs
+                ALL Orders
+            </Link>
+            <Link
+                className="list-group-item list-group-item-action"
+                to="/admin/view-orders-new"
+            >
+                New Orders
+            </Link>
+            <Link
+                className="list-group-item list-group-item-action"
+                to="/admin/view-orders-verified"
+            >
+                Verified Orders
+            </Link>
+            <Link
+                className="list-group-item list-group-item-action"
+                to="/admin/view-orders-pickedup"
+            >
+                Picked Up Orders
             </Link>
 
             <Link

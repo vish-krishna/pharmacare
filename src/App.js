@@ -97,6 +97,24 @@ function App() {
                                 exact
                                 element={<ViewOrdersAdmin />}
                             />
+
+                            <Route
+                                path="/admin/view-orders-new"
+                                exact
+                                element={<ViewOrdersAdmin flag={"new"} />}
+                            />
+
+                            <Route
+                                path="/admin/view-orders-verified"
+                                exact
+                                element={<ViewOrdersAdmin flag={"verified"} />}
+                            />
+
+                            <Route
+                                path="/admin/view-orders-pickedup"
+                                exact
+                                element={<ViewOrdersAdmin flag={"pickedup"} />}
+                            />
                             <Route
                                 path="/admin/view-supplier"
                                 exact

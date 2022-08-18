@@ -55,6 +55,8 @@ const UpdateDrug = (props) => {
                 <Card className="p-4" color="secondary">
                     <Form onSubmit={updateHandler}>
                         <FormGroup>
+                            <label>Drug Id</label>
+                            <Input defaultValue={Drug.drugId} readOnly></Input>
                             <label>Drug Name</label>
                             <Input
                                 type="text"
