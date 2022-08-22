@@ -22,6 +22,12 @@ function AdminMenu() {
                 >
                     View Drugs
                 </Link>
+                <Link
+                    className="list-group-item list-group-item-action"
+                    to="/admin/add-drug"
+                >
+                    Add Drug
+                </Link>
 
                 <Link
                     className="list-group-item list-group-item-action"
@@ -46,13 +52,6 @@ function AdminMenu() {
                     to="/admin/view-orders-pickedup"
                 >
                     Picked Up Orders
-                </Link>
-
-                <Link
-                    className="list-group-item list-group-item-action"
-                    to="/admin/add-drug"
-                >
-                    Add Drug
                 </Link>
 
                 <Link

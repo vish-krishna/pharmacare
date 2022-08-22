@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Container } from "reactstrap";
+import { Container, NavbarBrand, Navbar } from "reactstrap";
 import baseUrl from "../../api's/base_url";
 import Order from "./Order";
 
@@ -29,14 +29,16 @@ function ViewOrders() {
 
     return (
         <div>
-            <h1>This is View ordes pages </h1>
+            <Navbar className="my-2" color="secondary" dark>
+                <NavbarBrand>All Your Orders</NavbarBrand>
+            </Navbar>
             <Container>
-                {/* {console.log("view orders")}
-                {console.log(orders)} */}
+                {console.log("view all  orders")}
+                {console.log(orders.length)}
                 {orders.length > 0
                     ? orders.map((o) => {
                           console.log("view order in map ");
-                          console.log(o);
+                          //   console.log(o);
                           return <Order key={o.orderId} order={o} />;
                       })
                     : "No order"}

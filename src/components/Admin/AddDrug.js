@@ -35,14 +35,20 @@ function AddDrug() {
 
     return (
         <div className="AddDrug my-2">
-            <Navbar className="my-2" color="secondary" dark>
-                <NavbarBrand>Fill all the Details to add drug</NavbarBrand>
-            </Navbar>
-            <Container>
+            <Container
+                style={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "28rem",
+                }}
+            >
+                <Navbar className="my-2" color="secondary" dark>
+                    <NavbarBrand>Fill all the Details to add drug</NavbarBrand>
+                </Navbar>
                 <Card className="p-4" color="secondary">
                     <Form onSubmit={handleAddDrugForm}>
                         <FormGroup>
-                            <label>Drug Name</label>
+                            <label className="mt-2">Drug Name</label>
                             <Input
                                 type="text"
                                 placeholder="Enter Drug Name"
@@ -55,7 +61,7 @@ function AddDrug() {
                                     });
                                 }}
                             ></Input>
-                            <label>Expiry Date</label>
+                            <label className="mt-2">Expiry Date</label>
                             <Input
                                 type="date"
                                 placeholder="Enter Expiry Date"
@@ -68,7 +74,7 @@ function AddDrug() {
                                     });
                                 }}
                             ></Input>
-                            <label>Quantity</label>
+                            <label className="mt-2">Quantity</label>
                             <Input
                                 type="Number"
                                 placeholder="Enter Quantity"
@@ -81,7 +87,7 @@ function AddDrug() {
                                     });
                                 }}
                             ></Input>
-                            <label>Price</label>
+                            <label className="mt-2">Price</label>
                             <Input
                                 type="Number"
                                 placeholder="Enter Drug Price"
@@ -94,7 +100,7 @@ function AddDrug() {
                                     });
                                 }}
                             ></Input>
-                            <Button color="dark" type="submit">
+                            <Button className="mt-3" color="dark" type="submit">
                                 Add
                             </Button>
                         </FormGroup>

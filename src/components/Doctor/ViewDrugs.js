@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Drug from "./Drug";
+import { FormControl, Badge, Navbar, Dropdown, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 import axios from "axios";
+import { AiFillDelete } from "react-icons/ai";
 import baseUrl from "../../api's/base_url";
-
-// , {
-//                 headers: {
-//                     "Access-Control-Allow-Origin": "*",
-//                     "Access-Control-Allow-Headers": "Content-Type",
-//                     "Access-Control-Allow-Methods": "*",
-//                 },
-//             }
+import { CartState } from "./Context";
+import "../Style.css";
+import { Table } from "reactstrap";
 
 function ViewDrugs() {
-    const [drugs, setDrugs] = useState({});
+    const {
+        state: { cart },
+        dispatch,
+        drugDispatch,
+    } = CartState();
 
+    let index = 0;
+    const [drugs, setDrugs] = useState({});
     const getOrdersFromApi = () => {
         axios.get(baseUrl + "/drug").then(
             (response) => {
@@ -35,23 +40,94 @@ function ViewDrugs() {
 
     return (
         <div>
-            <h1>Drugs List </h1>
+            <h1>Drugs List</h1>
+            <h4>Quantity can be changed in the cart</h4>
+            <Navbar>
+                <div className="mx-3">
+                    <Dropdown alignRight>
+                        <Dropdown.Toggle variant="alpha">
+                            <FaShoppingCart color="black" fontSize="25px" />
+                            <Badge>{cart.length}</Badge>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu style={{ minWidth: 370 }}>
+                            {cart.length > 0 ? (
+                                <>
+                                    {cart.map((drugs) => (
+                                        <span
+                                            className="cartitem"
+                                            key={drugs.drugId}
+                                        >
+                                            <div className="cartItemDetail">
+                                                <span>{drugs.drugName}</span>
+                                                <span>₹ {drugs.price}</span>
 
-            {/* <Drug
-                drug={{
-                    id: "drug6",
-                    name: "name6",
-                    expire: "18-12-2026",
-                    quantity: 500,
-                    price: 12,
-                }}
-            /> */}
+                                                <AiFillDelete
+                                                    fontSize="20px"
+                                                    className="deleteIcon"
+                                                    style={{
+                                                        cursor: "pointer",
+                                                    }}
+                                                    onClick={() =>
+                                                        dispatch({
+                                                            type:
+                                                                "REMOVE_FROM_CART",
+                                                            payload: drugs,
+                                                        })
+                                                    }
+                                                />
+                                            </div>
+                                        </span>
+                                    ))}
+                                    <Link to="/doctor/cart">
+                                        <Button
+                                            style={{
+                                                width: "95%",
+                                                margin: "0 10px",
+                                            }}
+                                        >
+                                            Go To Cart
+                                        </Button>
+                                    </Link>
+                                </>
+                            ) : (
+                                <span style={{ padding: 10 }}>
+                                    Cart is Empty!
+                                </span>
+                            )}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
+            </Navbar>
 
-            {/* <Drug drug={drugs.at(1)} /> */}
-
-            {drugs.length > 0
+            {/* {drugs.length > 0
                 ? drugs.map((d) => <Drug key={d.drugId} drug={d} />)
-                : "no drugs available"}
+                : "no drugs available"} */}
+
+            {drugs.length > 0 ? (
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>Drug Id</th>
+                            <th>Drug Name</th>
+                            <th>Expiry Date</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {drugs.map((d) => {
+                            return (
+                                <Drug key={d.drugId} drug={d} index={++index} />
+                            );
+                        })}
+                    </tbody>
+                </Table>
+            ) : (
+                "no drugs available"
+            )}
         </div>
     );
 }

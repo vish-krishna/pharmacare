@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Supplier from "./Supplier";
 import axios from "axios";
 import baseUrl from "../../api's/base_url";
+import { Navbar, NavbarBrand, Table } from "reactstrap";
 
 function ViewSupplier() {
+    let index = 0;
     const [supplier, setSupplier] = useState({});
 
     const getSupplierFromApi = () => {
@@ -25,17 +26,46 @@ function ViewSupplier() {
         getSupplierFromApi();
     }, []);
 
+    const updateSupplierView = (id) => {
+        // setSupplier(supplier.filter((s) => s.supplierId !== id));
+    };
+
     return (
         <div>
-            <h1 className="my-2" color="secondary">
-                Supplier List
-            </h1>
-            {supplier.length > 0
-                ? supplier.map((s) => (
-                      <Supplier key={s.supplierId} supplier={s} />
-                  ))
-                : "no supplier available"}
+            <Navbar className="my-2" color="secondary" dark>
+                <NavbarBrand href="/">Supplier</NavbarBrand>
+            </Navbar>
+            {supplier.length > 0 ? (
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>Supplier Id</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {supplier.map((s) => {
+                            return (
+                                <Supplier
+                                    key={s.supplierId}
+                                    supplier={s}
+                                    deletionView={updateSupplierView}
+                                    index={++index}
+                                />
+                            );
+                        })}
+                    </tbody>
+                </Table>
+            ) : (
+                "No Suplier available"
+            )}
         </div>
     );
 }
+
 export default ViewSupplier;

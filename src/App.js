@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navb from "./components/Navb";
 
-import { Col, Container, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
 
 import AdminMenu from "./components/Admin/AdminMenu";
 import WelcomeAdmin from "./components/Admin/WelcomeAdmin";
@@ -21,6 +21,9 @@ import AddSupplier from "./components/Admin/AddSupplier";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import UpdateDrug from "./components/Admin/UpdateDrug";
+import UpdateSupplier from "./components/Admin/UpdateSupplier";
+import Cart from "./components/Doctor/Cart";
+import { useState } from "react";
 function App() {
     return (
         <div className="App">
@@ -68,6 +71,11 @@ function App() {
                                 path="/doctor/view-orders"
                                 exact
                                 element={<ViewOrders />}
+                            />
+                            <Route
+                                path="/doctor/cart"
+                                exact
+                                element={<Cart />}
                             />
                         </Routes>
 
@@ -121,10 +129,16 @@ function App() {
                                 exact
                                 element={<ViewSupplier />}
                             />
+
                             <Route
                                 path="/admin/add-supplier"
                                 exact
                                 element={<AddSupplier />}
+                            />
+                            <Route
+                                path="/admin/update-supplier/:id"
+                                exact
+                                element={<UpdateSupplier />}
                             />
                         </Routes>
                     </Col>

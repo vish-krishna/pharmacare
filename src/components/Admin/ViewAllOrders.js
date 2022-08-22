@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Navbar, NavbarBrand } from "reactstrap";
-import Acordion from "./Acordion";
 import OrderAdmin from "./OrderAdmin";
 function ViewAllOrders({ orders, updateViewOrder }) {
     return (

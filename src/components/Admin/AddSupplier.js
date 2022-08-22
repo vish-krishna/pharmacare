@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Input, Form, FormGroup, Container, Card, Button } from "reactstrap";
+import {
+    Input,
+    Form,
+    FormGroup,
+    Container,
+    Card,
+    Button,
+    NavbarBrand,
+    Navbar,
+} from "reactstrap";
 import axios from "axios";
 import baseUrl from "../../api's/base_url";
 function AddSupplier() {
@@ -28,12 +37,22 @@ function AddSupplier() {
 
     return (
         <div className="AddSupplier my-2">
-            <h1>ADD SUPPLIER</h1>
-            <Container>
+            <Container
+                style={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "28rem",
+                }}
+            >
+                <Navbar className="my-2" color="secondary" dark>
+                    <NavbarBrand>
+                        Fill all the Details to add Supplier
+                    </NavbarBrand>
+                </Navbar>
                 <Card className="p-4" color="secondary">
                     <Form onSubmit={handleForm}>
                         <FormGroup>
-                            <label>Name</label>
+                            <label className="mt-2">Name</label>
                             <Input
                                 type="text"
                                 placeholder="Enter Supplier Name"
@@ -46,7 +65,7 @@ function AddSupplier() {
                                     });
                                 }}
                             ></Input>
-                            <label>Email</label>
+                            <label className="mt-2">Email</label>
                             <Input
                                 type="email"
                                 placeholder="Enter supplier Email Id"
@@ -59,7 +78,7 @@ function AddSupplier() {
                                     });
                                 }}
                             ></Input>
-                            <label>Contact</label>
+                            <label className="mt-2">Contact</label>
                             <Input
                                 type="number"
                                 placeholder="Enter supplier Contact Number"
@@ -72,7 +91,7 @@ function AddSupplier() {
                                     });
                                 }}
                             ></Input>
-                            <Button color="dark" type="submit">
+                            <Button className="mt-3" color="dark" type="submit">
                                 Add
                             </Button>
                         </FormGroup>

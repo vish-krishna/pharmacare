@@ -94,8 +94,6 @@ function OrderAdmin({ order, updateViewOrder }) {
                                         <th>Expiry Date</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
-                                        <th></th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>

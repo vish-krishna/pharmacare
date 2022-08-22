@@ -1,7 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Input, Form, FormGroup, Container, Card, Button } from "reactstrap";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import {
+    Input,
+    Form,
+    FormGroup,
+    Container,
+    Card,
+    Button,
+    NavbarBrand,
+    Navbar,
+} from "reactstrap";
 import baseUrl from "../../api's/base_url";
 
 const UpdateDrug = (props) => {
@@ -28,6 +37,8 @@ const UpdateDrug = (props) => {
         getDrugByIdFromApi();
     }, []);
 
+    let navigate = useNavigate();
+
     const updateDrugOnApi = () => {
         axios.put(baseUrl + "/drug/" + id, Drug).then(
             (response) => {
@@ -35,6 +46,7 @@ const UpdateDrug = (props) => {
                 setDrug(response.data);
                 console.log("set drug");
                 console.log(Drug);
+                navigate("/admin/view-drugs");
             },
             (error) => {
                 console.log("error in drug by id");
@@ -44,20 +56,29 @@ const UpdateDrug = (props) => {
     };
 
     const updateHandler = () => {
+        console.log("call update method");
         updateDrugOnApi();
     };
 
     return (
         <div>
-            <h1>Update Drug</h1>
-            {/* <h1>{Drug.drugName}</h1> */}
-            <Container>
+            <Container
+                style={{
+                    textAlign: "center",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "28rem",
+                }}
+            >
+                <Navbar className="my-2" color="secondary" dark>
+                    <NavbarBrand>Update the Drug</NavbarBrand>
+                </Navbar>
                 <Card className="p-4" color="secondary">
                     <Form>
                         <FormGroup>
-                            <label>Drug Id</label>
+                            <label className="mt-2">Drug Id</label>
                             <Input defaultValue={Drug.drugId} readOnly></Input>
-                            <label>Drug Name</label>
+                            <label className="mt-2">Drug Name</label>
                             <Input
                                 type="text"
                                 placeholder="Enter Drug Name"
@@ -71,7 +92,7 @@ const UpdateDrug = (props) => {
                                     });
                                 }}
                             ></Input>
-                            <label>Expiry Date</label>
+                            <label className="mt-2">Expiry Date</label>
                             <Input
                                 type="date"
                                 placeholder="Enter Expiry Date"
@@ -85,7 +106,7 @@ const UpdateDrug = (props) => {
                                     });
                                 }}
                             ></Input>
-                            <label>Quantity</label>
+                            <label className="mt-2">Quantity</label>
                             <Input
                                 type="Number"
                                 placeholder="Enter Quantity"
@@ -99,7 +120,7 @@ const UpdateDrug = (props) => {
                                     });
                                 }}
                             ></Input>
-                            <label>Price</label>
+                            <label className="mt-2">Price</label>
                             <Input
                                 type="Number"
                                 placeholder="Enter Drug Price"
@@ -113,18 +134,21 @@ const UpdateDrug = (props) => {
                                     });
                                 }}
                             ></Input>
+
+                            <Button
+                                color="dark"
+                                className="mx-2 mt-3"
+                                onClick={updateHandler}
+                            >
+                                Save Update
+                            </Button>
+
                             <Link to="/admin/view-drugs">
                                 <Button
+                                    className="mt-3"
                                     color="dark"
                                     type="submit"
-                                    className="mx-2"
-                                    onClick={updateHandler}
                                 >
-                                    Save Update
-                                </Button>
-                            </Link>
-                            <Link to="/admin/view-drugs">
-                                <Button color="dark" type="submit">
                                     Cancel
                                 </Button>
                             </Link>
