@@ -1,13 +1,4 @@
 import React from "react";
-import {
-    Card,
-    CardBody,
-    CardText,
-    Container,
-    CardSubtitle,
-    Button,
-} from "reactstrap";
-
 const DrugInOrder = ({ drug, index }) => {
     return (
         <tr>

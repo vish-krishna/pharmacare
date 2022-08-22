@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import baseUrl from "../api's/base_url";
 
-const Login = () => {
+const Login = ({ setData, setUserDetails }) => {
     const [userData, setUserData] = useState({});
     let navigate = useNavigate();
     useEffect(() => {
@@ -29,6 +29,8 @@ const Login = () => {
                         (response) => {
                             console.log(response);
                             setUserData(response.data);
+                            setUserDetails(response.data);
+                            setData(true);
                             if (response.data.userRole === "ROLE_DOCTOR") {
                                 navigate("/doctor/home");
                             } else if (

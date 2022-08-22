@@ -12,7 +12,6 @@ import ViewDrugsAdmin from "./components/Admin/ViewDrugsAdmin";
 import ViewOrdersAdmin from "./components/Admin/ViewOrdersAdmin";
 
 import DoctorMenu from "./components/Doctor/DoctorMenu";
-import Photos from "./components/Doctor/Photos";
 import ViewDrugs from "./components/Doctor/ViewDrugs";
 import ViewOrders from "./components/Doctor/ViewOrders";
 import AddDrug from "./components/Admin/AddDrug";
@@ -23,18 +22,38 @@ import Register from "./components/Register";
 import UpdateDrug from "./components/Admin/UpdateDrug";
 import UpdateSupplier from "./components/Admin/UpdateSupplier";
 import Cart from "./components/Doctor/Cart";
+import Home from "./components/Home";
 import { useState } from "react";
 function App() {
+    const [isLogin, setIsLogin] = useState();
+    const setLogin = (flag) => {
+        setIsLogin(flag);
+    };
+
+    const [user, setUser] = useState();
+    const setUserDetails = (data) => {
+        setUser(data);
+    };
+
     return (
         <div className="App">
             <Router>
-                <Navb />
+                <Navb isLogin={isLogin} setData={setLogin} />
                 <Row>
                     <Routes>
-                        <Route path="/" exact element={<Photos />} />
+                        <Route path="/" exact element={<Home />} />
                     </Routes>
                     <Routes>
-                        <Route path="/login" exact element={<Login />} />
+                        <Route
+                            path="/login"
+                            exact
+                            element={
+                                <Login
+                                    setData={setLogin}
+                                    setUserDetails={setUserDetails}
+                                />
+                            }
+                        />
                     </Routes>
                     <Routes>
                         <Route path="/register" exact element={<Register />} />
@@ -60,7 +79,7 @@ function App() {
                             <Route
                                 path="/doctor/home"
                                 exact
-                                element={<Photos />}
+                                element={<Home />}
                             />
                             <Route
                                 path="/doctor/view-drugs"
@@ -70,12 +89,12 @@ function App() {
                             <Route
                                 path="/doctor/view-orders"
                                 exact
-                                element={<ViewOrders />}
+                                element={<ViewOrders user={user} />}
                             />
                             <Route
                                 path="/doctor/cart"
                                 exact
-                                element={<Cart />}
+                                element={<Cart user={user} />}
                             />
                         </Routes>
 

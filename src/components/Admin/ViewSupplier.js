@@ -42,8 +42,9 @@ function ViewSupplier() {
                             <th>S.N.</th>
                             <th>Supplier Id</th>
                             <th>Name</th>
-                            <th>Contact</th>
+                            
                             <th>Email</th>
+                            <th>Contact</th>
                             <th></th>
                             <th></th>
                         </tr>

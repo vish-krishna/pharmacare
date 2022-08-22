@@ -7,24 +7,11 @@ import {
     CarouselCaption,
 } from "reactstrap";
 
+import image1 from "../../images/image1.jpg";
 const items = [
     {
-        src: "https://picsum.photos/id/123/1200/400",
-        altText: "Slide 1",
-        caption: "Slide 1",
+        src: image1,
         key: 1,
-    },
-    {
-        src: "https://picsum.photos/id/456/1200/400",
-        altText: "Slide 2",
-        caption: "Slide 2",
-        key: 2,
-    },
-    {
-        src: "https://picsum.photos/id/678/1200/400",
-        altText: "Slide 3",
-        caption: "Slide 3",
-        key: 3,
     },
 ];
 
@@ -69,9 +56,6 @@ function Photos(args) {
 
     return (
         <div className="container">
-            <div>
-                <h1>Welcome admin page</h1>
-            </div>
             <Carousel
                 interval={3500}
                 activeIndex={activeIndex}

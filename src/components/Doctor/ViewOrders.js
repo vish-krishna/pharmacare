@@ -6,11 +6,11 @@ import { Container, NavbarBrand, Navbar } from "reactstrap";
 import baseUrl from "../../api's/base_url";
 import Order from "./Order";
 
-function ViewOrders() {
+function ViewOrders({ user }) {
     const [orders, setOrders] = useState({});
 
     const getOrdersFromApi = () => {
-        axios.get(baseUrl + "/order").then(
+        axios.get(baseUrl + "/order/byDoctorId/" + user.userId).then(
             (response) => {
                 console.log(response.data);
                 setOrders(response.data);

@@ -9,16 +9,19 @@ import {
     FormGroup,
     Card,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../api's/base_url";
 
 const Register = () => {
     const [Users, setUsers] = useState({});
 
+    const navigate = useNavigate();
+
     const handleForm = (e) => {
         console.log(Users);
         AddUser(Users);
+        navigate("/login");
         e.preventDefault();
     };
 
@@ -54,7 +57,7 @@ const Register = () => {
                                         onChange={(e) => {
                                             setUsers({
                                                 ...Users,
-                                                Name: e.target.value,
+                                                userName: e.target.value,
                                             });
                                         }}
                                     ></Input>
@@ -69,7 +72,7 @@ const Register = () => {
                                         onChange={(e) => {
                                             setUsers({
                                                 ...Users,
-                                                Email: e.target.value,
+                                                userEmail: e.target.value,
                                             });
                                         }}
                                     ></Input>
@@ -84,7 +87,7 @@ const Register = () => {
                                         onChange={(e) => {
                                             setUsers({
                                                 ...Users,
-                                                Pass: e.target.value,
+                                                userPassword: e.target.value,
                                             });
                                         }}
                                     ></Input>
@@ -99,7 +102,7 @@ const Register = () => {
                                         onChange={(e) => {
                                             setUsers({
                                                 ...Users,
-                                                Contact: e.target.value,
+                                                userContact: e.target.value,
                                             });
                                         }}
                                     ></Input>

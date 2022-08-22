@@ -25,13 +25,6 @@ function DoctorMenu() {
             >
                 View Orders
             </Link>
-            <Link
-                className="list-group-item list-group-item-action"
-                bg="danger"
-                to="/home"
-            >
-                Logout
-            </Link>
         </ListGroup>
     );
 }

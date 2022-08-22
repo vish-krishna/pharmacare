@@ -31,9 +31,9 @@ function Order({ order }) {
                     <AccordionHeader targetId="1">
                         <strong>Order Id : </strong>
                         {order.orderId}
-                        <span className="mx-2">
+                        {/* <span className="mx-2">
                             <strong> Doctor Id :</strong> {order.doctorId}
-                        </span>
+                        </span> */}
                         {order.verified ? (
                             <Badge className="mx-2" color="success" pill>
                                 verified

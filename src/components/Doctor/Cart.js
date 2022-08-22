@@ -4,8 +4,10 @@ import { Input } from "reactstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { CartState } from "./Context";
 import "../Style.css";
+import axios from "axios";
+import baseUrl from "../../api's/base_url";
 
-const Cart = () => {
+const Cart = ({ user }) => {
     const {
         state: { cart },
         dispatch,
@@ -21,6 +23,25 @@ const Cart = () => {
         );
     }, [cart]);
 
+    const postOrderToApi = (order) => {
+        axios.post(baseUrl + "/order", order).then(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    };
+    const [order, setOrder] = useState({
+        doctorId: user.userId,
+        orderedDrugList: cart,
+    });
+
+    const placeOrderHandler = () => {
+        console.log(order);
+        postOrderToApi(order);
+    };
     return (
         <div className="home">
             <div className="drugContainer">
@@ -97,7 +118,11 @@ const Cart = () => {
                 <span style={{ fontWeight: 700, fontSize: 20 }}>
                     Total: ₹ {total}
                 </span>
-                <Button type="button" disabled={cart.length === 0} onClick>
+                <Button
+                    type="button"
+                    disabled={cart.length === 0}
+                    onClick={placeOrderHandler}
+                >
                     Place order
                 </Button>
             </div>
