@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Button,
     Form,
@@ -19,24 +19,49 @@ const Register = () => {
     const navigate = useNavigate();
 
     const handleForm = (e) => {
-        console.log(Users);
-        AddUser(Users);
-        navigate("/login");
+        if (Users.userName === undefined) {
+            alert("User Name cannot be null");
+        } else if (Users.userEmail === undefined) {
+            alert("User Email cannot be null");
+        } else if (Users.userPassword === undefined) {
+            alert("User Password cannot be null");
+        } else if (Users.userContact === undefined) {
+            alert("User Contact cannot be null");
+        } else {
+            axios
+                .get(
+                    baseUrl + "/user/email/" + Users.userEmail,
+                    Users.userEmail
+                )
+                .then(
+                    (response) => {
+                        alert(
+                            "This Email id has already been Registered. Try with another Email Id."
+                        );
+                    },
+                    (error) => {
+                        AddUser(Users);
+                    }
+                );
+        }
         e.preventDefault();
     };
 
     const AddUser = (data) => {
         axios.post(`${baseUrl}/createUser`, data).then(
             (response) => {
-                console.log(response);
-                console.log("response");
+                alert("You are Registered. An mail has been send to your mail");
+                navigate("/login");
             },
             (error) => {
-                console.log(error);
-                console.log("error");
+                alert("Not Registered. Check Inputs");
             }
         );
     };
+
+    useEffect(() => {
+        document.title = "Register";
+    }, []);
 
     return (
         <div className="register my-2">
@@ -110,13 +135,13 @@ const Register = () => {
                                     <Input
                                         className="m-2"
                                         type="select"
-                                        id="role"
+                                        id="userRole"
                                         name="userRole"
                                         placeholder="select role"
-                                        onChange={(e) => {
+                                        onSelect={(e) => {
                                             setUsers({
                                                 ...Users,
-                                                role: e.target.value,
+                                                userRole: e.option.value,
                                             });
                                         }}
                                     >

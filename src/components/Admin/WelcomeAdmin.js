@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Carousel,
     CarouselItem,
@@ -53,6 +53,10 @@ function Photos(args) {
             </CarouselItem>
         );
     });
+
+    useEffect(() => {
+        document.title = "Home";
+    }, []);
 
     return (
         <div className="container">

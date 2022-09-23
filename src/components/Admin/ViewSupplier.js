@@ -27,7 +27,7 @@ function ViewSupplier() {
     }, []);
 
     const updateSupplierView = (id) => {
-        // setSupplier(supplier.filter((s) => s.supplierId !== id));
+        getSupplierFromApi();
     };
 
     return (
@@ -42,7 +42,7 @@ function ViewSupplier() {
                             <th>S.N.</th>
                             <th>Supplier Id</th>
                             <th>Name</th>
-                            
+
                             <th>Email</th>
                             <th>Contact</th>
                             <th></th>

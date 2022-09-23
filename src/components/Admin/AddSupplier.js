@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Input,
     Form,
@@ -11,9 +11,10 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import baseUrl from "../../api's/base_url";
+import { useNavigate } from "react-router-dom";
 function AddSupplier() {
     const [Supplier, setSupplier] = useState({});
-
+    let navigate = useNavigate();
     const handleForm = (e) => {
         console.log(Supplier);
         AddSupplier(Supplier);
@@ -27,6 +28,7 @@ function AddSupplier() {
                 console.log(response.data);
                 console.log("response");
                 alert("added Supplier");
+                navigate("/admin/view-supplier");
             },
             (error) => {
                 console.log(error);
@@ -34,6 +36,10 @@ function AddSupplier() {
             }
         );
     };
+
+    useEffect(() => {
+        document.title = "Supplier";
+    }, []);
 
     return (
         <div className="AddSupplier my-2">
@@ -80,7 +86,7 @@ function AddSupplier() {
                             ></Input>
                             <label className="mt-2">Contact</label>
                             <Input
-                                type="number"
+                                type="text"
                                 placeholder="Enter supplier Contact Number"
                                 id="SupplierContact"
                                 name="SupplierContact"

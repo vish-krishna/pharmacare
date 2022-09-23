@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Input,
     Form,
@@ -11,12 +11,21 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import baseUrl from "../../api's/base_url";
+import { useNavigate } from "react-router-dom";
 function AddDrug() {
     const [Drug, setDrug] = useState({});
+    let navigate = useNavigate();
+
     const handleAddDrugForm = (event) => {
         console.log("handle form drug");
-        console.log(Drug);
-        AddDrugToApi(Drug);
+        if (Drug.drugName === undefined) alert("Drug name cannot be Null.");
+        else if (Drug.drugQuantity === undefined)
+            alert("Drug quantity cannot by Null.");
+        else if (Drug.expiryDate === undefined)
+            alert("Drug expiry date cannot be null");
+        else if (Drug.price === undefined) alert("Drug Price cannot be null");
+        else AddDrugToApi(Drug);
+
         event.preventDefault();
     };
 
@@ -26,12 +35,19 @@ function AddDrug() {
         axios.post(baseUrl + "/drug", drugDetails).then(
             (response) => {
                 console.log("drug save successfully");
+                alert("Drug added successfully.");
+                navigate("/admin/view-drugs");
             },
             (error) => {
                 console.log("drug does not save");
+                alert("Some problem occoured");
             }
         );
     };
+
+    useEffect(() => {
+        document.title = "Drugs";
+    }, []);
 
     return (
         <div className="AddDrug my-2">

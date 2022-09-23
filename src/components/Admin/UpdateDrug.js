@@ -42,10 +42,8 @@ const UpdateDrug = (props) => {
     const updateDrugOnApi = () => {
         axios.put(baseUrl + "/drug/" + id, Drug).then(
             (response) => {
-                console.log(response.data);
                 setDrug(response.data);
-                console.log("set drug");
-                console.log(Drug);
+                alert("Drug updated Successfully.");
                 navigate("/admin/view-drugs");
             },
             (error) => {

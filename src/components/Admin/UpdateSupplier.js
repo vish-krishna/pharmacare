@@ -43,14 +43,12 @@ const UpdateSupplier = () => {
     const updateSupplierOnApi = () => {
         axios.put(baseUrl + "/supplier/" + id, supplier).then(
             (response) => {
-                console.log(response.data);
                 setSupplier(response.data);
-                console.log("set Supplier");
-                console.log(supplier);
+                alert("Supplier updated successfully.");
                 navigate("/admin/view-supplier");
             },
             (error) => {
-                console.log("error in Supplier put");
+                alert("error in Supplier updatation");
                 console.log(error);
             }
         );
@@ -113,7 +111,7 @@ const UpdateSupplier = () => {
                             ></Input>
                             <label className="mt-2">Contact</label>
                             <Input
-                                type="number"
+                                type="text"
                                 placeholder="Enter supplier Contact Number"
                                 id="supplierContact"
                                 name="supplierContact"

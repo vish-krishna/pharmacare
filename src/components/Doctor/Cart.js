@@ -6,6 +6,7 @@ import { CartState } from "./Context";
 import "../Style.css";
 import axios from "axios";
 import baseUrl from "../../api's/base_url";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ user }) => {
     const {
@@ -13,6 +14,8 @@ const Cart = ({ user }) => {
         dispatch,
     } = CartState();
     const [total, setTotal] = useState();
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         setTotal(
@@ -27,6 +30,7 @@ const Cart = ({ user }) => {
         axios.post(baseUrl + "/order", order).then(
             (response) => {
                 console.log(response);
+                navigate("/doctor/view-orders");
             },
             (error) => {
                 console.log(error);
@@ -57,21 +61,6 @@ const Cart = ({ user }) => {
                                 </Col>
                                 <Col md={2}>₹ {drugs.price}</Col>
 
-                                {/* 	<Col md={3}>
-                  <Input 
-                    
-                    placeholder="Quantity"
-                    type="number"
-                    value={drugs.drugQuantity}
-                    onChange={(e)=>
-                    dispatch({
-                      type:"CHANGE_CART_QTY",
-                      payload:{
-                        drugId: drugs.DrugId,
-                        Quantity: e.target.value,
-                      }
-                    })}></Input>
-                  </Col>    */}
                                 <Col md={2}>
                                     <Form.Control
                                         as="select"

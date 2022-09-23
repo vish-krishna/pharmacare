@@ -38,7 +38,6 @@ function ViewOrders({ user }) {
                 {orders.length > 0
                     ? orders.map((o) => {
                           console.log("view order in map ");
-                          //   console.log(o);
                           return <Order key={o.orderId} order={o} />;
                       })
                     : "No order"}

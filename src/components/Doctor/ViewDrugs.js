@@ -40,8 +40,7 @@ function ViewDrugs() {
 
     return (
         <div>
-            <h1>Drugs List</h1>
-            <h4>Quantity can be changed in the cart</h4>
+            <h3>Availabe drugs in the Pharmacy</h3>
             <Navbar>
                 <div className="mx-3">
                     <Dropdown alignRight>
@@ -98,10 +97,6 @@ function ViewDrugs() {
                     </Dropdown>
                 </div>
             </Navbar>
-
-            {/* {drugs.length > 0
-                ? drugs.map((d) => <Drug key={d.drugId} drug={d} />)
-                : "no drugs available"} */}
 
             {drugs.length > 0 ? (
                 <Table responsive>

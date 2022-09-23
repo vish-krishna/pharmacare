@@ -7,9 +7,6 @@ function AdminMenu() {
     return (
         <div>
             <ListGroup>
-                {/* <Navbar className="my-2" color="secondary" dark>
-                    <NavbarBrand className="App">Menu</NavbarBrand>
-                </Navbar> */}
                 <Link
                     className="list-group-item list-group-item-action"
                     to="/admin/home"
@@ -65,6 +62,12 @@ function AdminMenu() {
                     to="/admin/add-supplier"
                 >
                     Add Supplier
+                </Link>
+                <Link
+                    className="list-group-item list-group-item-action"
+                    to="/admin/Sales"
+                >
+                    View Sales
                 </Link>
             </ListGroup>
         </div>

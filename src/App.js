@@ -24,6 +24,7 @@ import UpdateSupplier from "./components/Admin/UpdateSupplier";
 import Cart from "./components/Doctor/Cart";
 import Home from "./components/Home";
 import { useState } from "react";
+import Sales from "./components/Admin/Sales";
 function App() {
     const [isLogin, setIsLogin] = useState();
     const setLogin = (flag) => {
@@ -158,6 +159,11 @@ function App() {
                                 path="/admin/update-supplier/:id"
                                 exact
                                 element={<UpdateSupplier />}
+                            />
+                            <Route
+                                path="/admin/Sales"
+                                exact
+                                element={<Sales />}
                             />
                         </Routes>
                     </Col>
