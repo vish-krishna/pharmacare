@@ -5,12 +5,12 @@ import { ListGroup } from "reactstrap";
 function DoctorMenu() {
     return (
         <ListGroup>
-            <Link
+            {/* <Link
                 className="list-group-item list-group-item-action"
                 to="/doctor/home"
             >
                 Home
-            </Link>
+            </Link> */}
 
             <Link
                 className="list-group-item list-group-item-action"

@@ -7,12 +7,12 @@ function AdminMenu() {
     return (
         <div>
             <ListGroup>
-                <Link
+                {/* <Link
                     className="list-group-item list-group-item-action"
                     to="/admin/home"
                 >
                     Home Admin
-                </Link>
+                </Link> */}
                 <Link
                     className="list-group-item list-group-item-action"
                     to="/admin/view-drugs"

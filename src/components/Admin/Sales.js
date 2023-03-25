@@ -61,7 +61,9 @@ const Sales = () => {
                             View Sale by Doctor Id
                         </Button>
                     </Form>
-                    <CardBody>TotalSale by the doctor is Rs.{DSale}</CardBody>
+                    <CardBody>
+                        Total purchase by the doctor is Rs.{DSale}
+                    </CardBody>
                 </Card>
             </Container>
         </div>
